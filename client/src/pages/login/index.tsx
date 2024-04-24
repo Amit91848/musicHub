@@ -7,7 +7,6 @@ import Seo from '@/components/Seo'
 
 export default function Login() {
     const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL
-    const _ = process.env.NODE_ENV
     return (
         <>
             <Seo templateTitle='Login Page' />
@@ -31,7 +30,7 @@ export default function Login() {
                                 leftIcon={AiFillYoutube}
                                 source='youtube'
                             >
-                                Use With Youtube
+                                Jam With Youtube
                             </ButtonLink>
                             <br />
                             <ButtonLink
@@ -41,7 +40,7 @@ export default function Login() {
                                 leftIcon={BsSpotify}
                                 source='spotify'
                             >
-                                Use With Spotify
+                                Groove With Spotify
                             </ButtonLink>
                         </div>
                     </div>
