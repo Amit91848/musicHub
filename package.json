@@ -1,0 +1,17 @@
+{
+    "name": "musichub",
+    "description": "Listen to music from favorite services in same app.",
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "client",
+            "server"
+        ],
+        "nohoist": [
+            "**/client",
+            "**/client/**",
+            "**/server",
+            "**/server/**"
+        ]
+    }
+}
