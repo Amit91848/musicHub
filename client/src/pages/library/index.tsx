@@ -5,6 +5,7 @@ import Playlists from '@/components/LibraryPlaylist/Playlists'
 
 import { updatePlaylists } from '@/store/reducers/library'
 import { useAppDispatch } from '@/store/store'
+import Layout from '@/components/layout/Layout'
 
 export default function LibraryPage() {
     const dispatch = useAppDispatch()
@@ -25,8 +26,10 @@ export default function LibraryPage() {
     }, [])
     return (
         <>
-            <button onClick={() => getAllPlaylists(true)}> Sync </button>
-            <Playlists />
+            <Layout>
+                <button onClick={() => getAllPlaylists(true)}> Sync </button>
+                <Playlists />
+            </Layout>
         </>
     )
 }

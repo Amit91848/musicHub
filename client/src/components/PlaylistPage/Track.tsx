@@ -30,7 +30,7 @@ export const Track: React.FC<TrackProps> = ({
     index,
 }) => {
     let url = ''
-    if (track.img[2]) {
+    if (track && track.img && track.img.length > 0 && track.img[2]) {
         url = track.img[2].url
     }
 
@@ -82,7 +82,7 @@ export const Track: React.FC<TrackProps> = ({
                     <BsFillTrashFill size={17} /> Remove
                 </span>
             ),
-            onClick: () => {},
+            onClick: () => { },
         },
     ]
 
@@ -97,8 +97,8 @@ export const Track: React.FC<TrackProps> = ({
                         <div
                             className={clsxm(
                                 'align-center absolute z-10 flex cursor-pointer justify-center transition duration-200' &&
-                                    !isActive &&
-                                    'opacity-0 group-hover:opacity-100'
+                                !isActive &&
+                                'opacity-0 group-hover:opacity-100'
                             )}
                         >
                             {' '}
@@ -134,7 +134,7 @@ export const Track: React.FC<TrackProps> = ({
                         {track.title}
                     </div>
                     <div className=''>
-                        {track.artist.map((a, index) => (
+                        {track.artist?.map((a, index) => (
                             <ArtistLink
                                 key={a.id}
                                 artist={a}
@@ -165,7 +165,7 @@ export const Track: React.FC<TrackProps> = ({
                     <Dropdown track={track} items={items} />
                 </div>
                 <div className=' text-sm'>
-                    <div>{millisToMinutesAndSeconds(track.duration)}</div>
+                    <div>{millisToMinutesAndSeconds(track.duration || 0)}</div>
                 </div>
             </div>
         </div>

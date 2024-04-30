@@ -88,7 +88,7 @@ const player = createSlice({
                         index,
                         isPlaying: true,
                         currentTrack: { ...track },
-                        duration: track.duration,
+                        duration: track?.duration || 0,
                         queue: [...queue]
                     }
                 } else {
@@ -103,7 +103,7 @@ const player = createSlice({
                             id: playlist.playlistId,
                             source: playlist.source
                         },
-                        duration: track.duration,
+                        duration: track?.duration || 0,
                         userQueue: [],
                         userQueueIndex: 0
                     }
@@ -118,7 +118,7 @@ const player = createSlice({
                     index,
                     isPlaying: true,
                     currentTrack: { ...track },
-                    duration: track.duration,
+                    duration: track?.duration || 0,
                     queue: [...queue],
                     playlist: {
                         id: '',
@@ -138,7 +138,7 @@ const player = createSlice({
                     ...state,
                     userQueueIndex: userQueueIndex + 1,
                     allowAutoplay: false,
-                    duration: nextTrack.duration,
+                    duration: nextTrack?.duration || 0,
                     isPlaying: true,
                     currentTrack: { ...nextTrack },
                 }
@@ -160,7 +160,7 @@ const player = createSlice({
                 index: changeTo,
                 isPlaying: true,
                 currentTrack: { ...newTrack },
-                duration: newTrack.duration
+                duration: newTrack?.duration || 0,
             }
 
         },

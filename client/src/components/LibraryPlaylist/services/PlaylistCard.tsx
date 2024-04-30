@@ -7,7 +7,7 @@ import { loadTracksOnPlaylist } from '@/store/reducers/library'
 import { play } from '@/store/reducers/player'
 import { useAppDispatch } from '@/store/store'
 
-import { CommonPlaylist, source } from '@/constant/services'
+import { CommonPlaylist, CommonTracks, source } from '@/constant/services'
 
 interface PlaylistCardProps {
     playlist: CommonPlaylist
@@ -21,35 +21,35 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
     const dispatch = useAppDispatch()
     const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL
     const fetchTracks = async () => {
-        const response = await axios.get(
+        const response = await axios.get<CommonTracks[]>(
             `${backendURL}/api/${source}/playlist/${playlist.playlistId}/tracks`,
             {
                 withCredentials: true,
             }
         )
-        const track = response.data
+        const tracks = response.data
         dispatch(
             loadTracksOnPlaylist({
-                tracks: track,
+                tracks: tracks,
                 playlistId: playlist.playlistId,
                 source: source,
             })
         )
+        return tracks;
     }
     const handlePlayPlaylist = async (
         e: React.MouseEvent<SVGElement, MouseEvent>
     ) => {
         e.preventDefault()
-        if (playlist.tracks.length === 0) {
-            await fetchTracks()
-        }
-        dispatch(play({ playlist: playlist, track: playlist.tracks[0] }))
+        const tracks = playlist.tracks.length === 0 ? await fetchTracks() : playlist.tracks;
+        dispatch(play({ playlist, track: tracks[0] }))
     }
+    const { playlistId, img, name, total } = playlist;
+    console.log("playlist: ", playlist);
     return (
         <Link
-            href={`/library/playlist/${source.toLowerCase()}/${
-                playlist.playlistId
-            }`}
+            href={`/library/playlist/${source.toLowerCase()}/${playlistId
+                }`}
         >
             <div className='align-center group group flex h-fit w-full cursor-pointer flex-col justify-center space-y-5 rounded-lg bg-[#1e2629] p-6 transition duration-300 hover:bg-[#2f3638]'>
                 <div className='relative flex items-center justify-center'>
@@ -60,17 +60,16 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
                     />
                     <div
                         style={{
-                            backgroundImage: `url(${
-                                playlist.img[0] ? playlist.img[0].url : ''
-                            })`,
+                            backgroundImage: `url(${img[0] ? img[0].url : ''
+                                })`,
                         }}
                         className='h-28 w-28 rounded-lg border-[2px] border-gray-700  bg-cover bg-center bg-no-repeat group-hover:brightness-75'
                     ></div>
                 </div>
                 <div className='overflow-hidden text-ellipsis whitespace-nowrap text-center text-sm'>
-                    {playlist.name}
+                    {name}
                     <div className='mt-1 font-primary text-xs text-gray-400/50'>
-                        {playlist.total} tracks
+                        {total} tracks
                     </div>
                 </div>
             </div>

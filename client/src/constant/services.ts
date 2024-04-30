@@ -32,7 +32,7 @@ export interface CommonTracks {
         id: string,
         name: string,
     }[],
-    duration: number,
+    duration?: number,
     img: {
         height: number | null,
         url: string,

@@ -25,7 +25,7 @@ export const PlaylistRow: React.FC<PlaylistRowProps> = ({
                     'font-eliteSpecial text-3xl'
                 )}
             >
-                {source} Playlist
+                {source.charAt(0).toUpperCase() + source.slice(1)} Playlist
             </div>
             <div className='mt-3 grid grid-cols-[repeat(auto-fill,minmax(155px,1fr))] gap-5'>
                 {playlists?.map((playlist) => (
