@@ -42,10 +42,9 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({
     ) => {
         e.preventDefault()
         const tracks = playlist.tracks.length === 0 ? await fetchTracks() : playlist.tracks;
-        dispatch(play({ playlist, track: tracks[0] }))
+        dispatch(play({ playlist, track: tracks[0], trackList: tracks }))
     }
     const { playlistId, img, name, total } = playlist;
-    console.log("playlist: ", playlist);
     return (
         <Link
             href={`/library/playlist/${source.toLowerCase()}/${playlistId
