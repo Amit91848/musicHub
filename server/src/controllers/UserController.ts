@@ -44,7 +44,7 @@ export const logoutUser = async (res: Response) => {
     res.clearCookie('appUser');
 }
 
-export const findUser = async (userId: string) => {
+export const findUserById = async (userId: string) => {
     console.log('userid in finduser function: ', userId);
     return await UserModel.findOne({ _id: userId });
 }

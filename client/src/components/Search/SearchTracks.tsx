@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+//@ts-ignore
 import { TailSpin } from 'react-loader-spinner'
 import { useSelector } from 'react-redux'
 
@@ -39,6 +40,7 @@ export const SearchTracks: React.FC<SpotifySearchTracksProps> = ({
     const [, setNext] = useState('')
 
     const dispatch = useAppDispatch()
+    console.log("tracks: ", tracks);
 
     const handlePlay = (track: CommonTracks) => {
         dispatch(play({ track, trackList: tracks }))
@@ -83,7 +85,7 @@ export const SearchTracks: React.FC<SpotifySearchTracksProps> = ({
                     tracks?.map((track, index) => (
                         <Track
                             index={index}
-                            handlePlay={handlePlay}
+                            // handlePlay={handlePlay}
                             isActive={currentTrack.id === track.id}
                             track={track}
                             key={track.id}

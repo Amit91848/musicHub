@@ -7,6 +7,8 @@ import { ImSoundcloud } from 'react-icons/im'
 import SearchTracks from './SearchTracks'
 import ShowHideButtons, { Contents } from './ShowHideButtons'
 import SpotifySearchArtists from './SpotifySearchArtists'
+import useMe from '@/hooks/useMe'
+import { BiLoader } from 'react-icons/bi'
 
 // interface SearchContainerProps {}
 
@@ -17,6 +19,10 @@ export const SearchContainer: React.FC = () => {
     const [showYoutube, setShowYoutube] = useState(true)
     const [showSpotify, setShowSpotify] = useState(true)
     const [showSoundcloud, setShowSoundcloud] = useState(true)
+
+    const { user, isLoading } = useMe();
+    console.log("isLoading: ", isLoading);
+    console.log('user: ', user);
 
     const objects: Contents[] = [
         {
@@ -53,12 +59,18 @@ export const SearchContainer: React.FC = () => {
                     {'<-'} Return to search Page
                 </Link>
             </div>
-            <ShowHideButtons objects={objects} />
-            {showSpotify && <SpotifySearchArtists />}
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-4'>
-                {showSpotify && <SearchTracks source='spotify' />}
-                {showYoutube && <SearchTracks source='youtube' />}
-            </div>
+            <>
+                {isLoading ? <BiLoader /> :
+                    <>
+                        <ShowHideButtons objects={objects} />
+                        {showSpotify && user?.spotifyConnected && <SpotifySearchArtists />}
+                        <div className='grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-4'>
+                            {showSpotify && user?.spotifyConnected && <SearchTracks source='spotify' />}
+                            {showYoutube && user?.googleConnected && <SearchTracks source='youtube' />}
+                        </div>
+                    </>
+                }
+            </>
         </div>
         // </div>
     )

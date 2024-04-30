@@ -8,6 +8,7 @@ import userRoute from './userApi';
 import searchRoute from './searchApi';
 import redisClient from '../../config/redisSetup';
 import customRoute from './customApi';
+import meRoute from "./me";
 
 const apiRoute = Router();
 
@@ -52,6 +53,8 @@ apiRoute.use('/playlists', async (req, res) => {
         }
     }
 })
+
+apiRoute.use("/me", meRoute);
 
 apiRoute.use('/user', userRoute);
 
