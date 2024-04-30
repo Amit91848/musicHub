@@ -25,7 +25,6 @@ export const VolumeController: React.FC = () => {
 
     const handleQueueClick = () => {
         setShowQueueModal(!showQueueModal)
-        dispatch(updateActive('queue'))
     }
 
     const handleUpdateVolume = () => {

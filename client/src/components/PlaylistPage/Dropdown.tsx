@@ -30,7 +30,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ items }) => {
                 className='dropdown-content menu rounded-box w-52 bg-darkSupport p-2 shadow'
             >
                 {items?.map((item) => (
-                    <li key={Math.random() % 10}>
+                    <li key={Math.random() % 10} className='text-sm'>
                         <a
                             onClick={item.onClick}
                             className='hover:bg-[#2f3638]'
@@ -44,45 +44,4 @@ export const Dropdown: React.FC<DropdownProps> = ({ items }) => {
     )
 }
 
-export default Dropdown
-{
-    /* <li>
-                    <a
-                        className='hover:bg-[#2f3638]'
-                        onClick={handleAddToQueue}
-                    >
-                        {' '}
-                        <MdQueueMusic size={17} /> Add To Queue
-                    </a>
-                </li> */
-}
-{
-    /* <li>
-                    <a className='hover:bg-[#2f3638]'>
-                        {' '}
-                        <label
-                            className='relative flex cursor-pointer items-center'
-                            htmlFor='my-modal-5'
-                            onClick={() => {
-                                dispatch(
-                                    updateActive({
-                                        active: 'playlists',
-                                        track: track,
-                                    })
-                                )
-                            }}
-                        >
-                            <AiOutlinePlus className='mr-3' size={17} /> Add to
-                            playlist
-                        </label>
-                    </a>
-                </li> */
-}
-{
-    /* <li>
-                        <a className='hover:bg-[#2f3638]'>
-                            {' '}
-                            <BsFillTrashFill size={17} /> Remove
-                        </a>
-                    </li> */
-}
+export default Dropdown;

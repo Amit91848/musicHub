@@ -61,6 +61,7 @@ export const fetchProfileAndSetAccessToken = async (
 ) => {
   // console.log(userId + ' ' + source);
   const profile = await findProfileOfUser(userId, source);
+  if (!profile) return null;
   //@ts-ignore
   const { expiresIn, refreshToken, _id } = profile;
   //@ts-ignore
@@ -109,8 +110,8 @@ export const refreshAccessToken = async (
           "Basic " +
           Buffer.from(
             process.env.SPOTIFY_CLIENT_ID +
-              ":" +
-              process.env.SPOTIFY_CLIENT_SECRET
+            ":" +
+            process.env.SPOTIFY_CLIENT_SECRET
           ).toString("base64"),
       },
       form: {
@@ -148,7 +149,7 @@ export const lastFmArtistData = async (artistName: string) => {
 
   const response = await axios.get(
     lastFmURL +
-      `/?method=artist.getinfo&artist=${artistName}&api_key=${apiKey}&format=json`
+    `/?method=artist.getinfo&artist=${artistName}&api_key=${apiKey}&format=json`
   );
 
   return response.data;

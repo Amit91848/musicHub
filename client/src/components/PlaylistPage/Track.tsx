@@ -61,27 +61,27 @@ export const Track: React.FC<TrackProps> = ({
     const items: DropdownItems[] = [
         {
             Element: (
-                <span>
+                <div className='flex gap-2 items-center'>
                     {' '}
                     <MdQueueMusic size={17} /> Add To Queue{' '}
-                </span>
+                </div>
             ),
             onClick: handleAddToQueue,
         },
         {
             Element: (
-                <span>
-                    <AiOutlinePlus className='mr-3' size={17} /> Add to playlist
-                </span>
+                <div className='flex gap-2 items-center'>
+                    <AiOutlinePlus size={17} /> Add to playlist
+                </div>
             ),
             onClick: handleAddToPlaylist,
         },
         {
             Element: (
-                <span>
+                <div className='flex gap-2 items-center'>
                     {' '}
-                    <BsFillTrashFill size={17} /> Remove
-                </span>
+                    <BsFillTrashFill size={15} /> Remove
+                </div>
             ),
             onClick: () => { },
         },

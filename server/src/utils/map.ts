@@ -121,13 +121,13 @@ export const mapYoutubeToCommonFormat = (playlists: youtubePlaylistResponse[]): 
 
 export const mapYoutubeVideoDurationToPlaylistItems = async (items: CommonTracks[], userId: string): Promise<CommonTracks[]> => {
     let idsString = '';
-    items.forEach(async (item) => {
+    items?.forEach(async (item) => {
         idsString += item.id + ','
     })
     const videoQueries = await getYoutubeVideoLength(idsString, userId);
     for (const query of videoQueries) {
         // find the corresponding CommonTracks object by id
-        const video = items.find(v => v.id === query.id);
+        const video = items?.find(v => v.id === query.id);
         if (video) {
             // set the duration property of the CommonTracks object
             video.duration = convertDurationToSeconds(query.contentDetails.duration);

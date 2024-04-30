@@ -19,21 +19,20 @@ export const LinkAccount: React.FC<LinkAccountProps> = ({ active }) => {
         active === 'soundcloud'
             ? FaSoundcloud
             : active === 'spotify'
-            ? BsSpotify
-            : BsYoutube
+                ? BsSpotify
+                : BsYoutube
     return (
         <div className='mt-3 flex justify-center'>
             <ButtonLink
-                href={`${backendURL}/auth/${
-                    active === 'youtube' ? 'google' : active
-                }/link`}
+                href={`${backendURL}/auth/${active === 'youtube' ? 'google' : active
+                    }/link`}
                 className='h-11 w-4/6 border py-6 px-4 text-[1px] font-light shadow-2xl'
                 variant='outline'
                 leftIcon={icon}
                 source={
                     active === 'soundcloud' ||
-                    active === 'spotify' ||
-                    active === 'youtube'
+                        active === 'spotify' ||
+                        active === 'youtube'
                         ? active
                         : 'spotify'
                 }

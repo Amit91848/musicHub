@@ -33,6 +33,8 @@ export const UnlinkAccount: React.FC<UnlinkAccountProps> = ({ active }) => {
                 `${backendURL}/api/user/remove?provider=${active}`,
                 { withCredentials: true }
             )
+        } else {
+            alert('Cannot Unlink, you need to have at least one account connected');
         }
     }
 
