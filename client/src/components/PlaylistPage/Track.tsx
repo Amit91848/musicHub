@@ -2,37 +2,38 @@ import React from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillPlayFill, BsFillTrashFill } from 'react-icons/bs'
 import { MdQueueMusic } from 'react-icons/md'
+//@ts-ignore
 import { Audio } from 'react-loader-spinner'
 
 import clsxm from '@/lib/clsxm'
 
-import { addToQueue } from '@/store/reducers/player'
+import { addToQueue, handlePlayPause } from '@/store/reducers/player'
 import { updateActive } from '@/store/reducers/user'
-import { useAppDispatch } from '@/store/store'
+import { RootState, useAppDispatch } from '@/store/store'
 
 import { CommonTracks } from '@/constant/services'
 
 import ArtistLink from './ArtistLink'
 import Dropdown, { DropdownItems } from './Dropdown'
 import ServiceIcon from '../ServiceIcon/ServiceIcon'
+import { useSelector } from 'react-redux'
 
 interface TrackProps {
     track: CommonTracks
     isActive: boolean
-    handlePlay?: (track: CommonTracks) => void
     index: number
 }
 
 export const Track: React.FC<TrackProps> = ({
     track,
     isActive,
-    handlePlay,
     index,
 }) => {
     let url = ''
     if (track && track.img && track.img.length > 0 && track.img[2]) {
         url = track.img[2].url
     }
+    const { currentTrack } = useSelector((state: RootState) => state.player)
 
     const dispatch = useAppDispatch()
     function millisToMinutesAndSeconds(millis: number) {
@@ -106,15 +107,19 @@ export const Track: React.FC<TrackProps> = ({
                                 <BsFillPlayFill
                                     className='cursor-pointer'
                                     onClick={() => {
-                                        if (handlePlay) {
-                                            handlePlay(track)
+                                        if (track.id === currentTrack.id) {
+                                            dispatch(handlePlayPause(true))
+                                        } else {
+                                            console.log("TODO: play selected track")
                                         }
                                     }}
                                     color='#f7f7f7'
                                     size={35}
                                 />
                             ) : (
-                                <div onClick={pauseTrack}>
+                                <div onClick={() => {
+                                    dispatch(handlePlayPause(false));
+                                }}>
                                     <Audio
                                         height='27'
                                         width='35'

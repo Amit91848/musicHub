@@ -18,7 +18,7 @@ export const QueueModal: React.FC<QueueModalProps> = ({
     showQueueModal,
     setShowQueueModal,
 }) => {
-    const { userQueue, userQueueIndex, currentTrack, queue, index } =
+    const { userQueue, userQueueIndex, currentTrack, queue, index, isPlaying } =
         useSelector((state: RootState) => state.player)
 
     return (
@@ -44,7 +44,7 @@ export const QueueModal: React.FC<QueueModalProps> = ({
                             index={1}
                             track={currentTrack}
                             key={currentTrack.id}
-                            isActive={true}
+                            isActive={true && isPlaying}
                         />
                     </>
                 </ModalBody>
